@@ -12,6 +12,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -27,7 +29,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting("Android")
+                    JetpackTutorialWithImage(stringResource(R.string.header_text), stringResource(R.string.para_one_text), stringResource(R.string.para_two_text))
                 }
             }
         }
@@ -37,32 +39,39 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun JetpackTutorialWithImage(header: String, firstPara: String, secondPara: String){
     val image = painterResource(R.drawable.bg_compose_background)
-    Box {
+    Column {
         Image(
             painter = image,
             contentDescription = "header image of mobile phone image with applications",
             modifier = Modifier.fillMaxWidth()
-            )
+        )
         JetpackTutorialWithText(header = header, firstPara = firstPara, secondPara = secondPara)
-        }
+    }
 }
 
 @Composable
 fun JetpackTutorialWithText(header: String, firstPara: String, secondPara: String) {
-    Column{
+    Column {
         Text(text = header,
             fontSize = 24.sp,
             modifier = Modifier
-                .fillMaxWidth().wrapContentWidth(Alignment.Start)
+                .fillMaxWidth()
+                .wrapContentWidth(Alignment.Start)
                 .padding(16.dp)
         )
         Text(text = firstPara,
-            fontSize = 16.dp,
-            modifier = Modifier.fillMaxWidth().wrapContentWidth(Alignment.Start).padding(start = 16.dp, end = 16.dp)
+            textAlign = TextAlign.Justify,
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentWidth(Alignment.Start)
+                .padding(start = 16.dp, end = 16.dp)
         )
         Text(text = secondPara,
-            fontSize = 16.dp,
+            textAlign = TextAlign.Justify,
             modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentWidth(Alignment.Start)
+                .padding(16.dp)
         )
     }
 
@@ -72,6 +81,6 @@ fun JetpackTutorialWithText(header: String, firstPara: String, secondPara: Strin
 @Composable
 fun DefaultPreview() {
     JetpackComposeTutorialTheme {
-        Greeting("Android")
+        JetpackTutorialWithImage(stringResource(R.string.header_text), stringResource(R.string.para_one_text), stringResource(R.string.para_two_text))
     }
 }
